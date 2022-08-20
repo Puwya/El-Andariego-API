@@ -2,6 +2,7 @@ require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
+const path = require('path');
 const ITEMS_PATH = require('./routes/api/items');
 const CATEGORIES_PATH = require('./routes/api/categories');
 
@@ -11,8 +12,8 @@ const PORT = process.env.PORT || 3000;
 // Middleware
 app.use(cors());
 app.use(express.json());
-app.use(express.static(__dirname + '/public/dist'));
-app.use(express.static(__dirname + '/assets'));
+app.use(express.static(path.join(__dirname, '/public/dist')));
+app.use(express.static(path.join(__dirname, '/assets')));
 
 mongoose
   .connect(process.env.MONGO_URI, {
@@ -24,6 +25,7 @@ mongoose
 
 app.use('/api/items', ITEMS_PATH);
 app.use('/api/categories', CATEGORIES_PATH);
+
 app.get('/*', (req, res) => {
   res.sendFile(path.join(__dirname, './dist', 'index.html'));
 });
