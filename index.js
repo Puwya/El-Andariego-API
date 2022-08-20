@@ -13,8 +13,6 @@ app.use(cors());
 app.use(express.json());
 app.use(express.static(__dirname + '/public/dist'));
 app.use(express.static(__dirname + '/assets'));
-app.use(express.static(__dirname + '/assets/heros'));
-app.use(express.static(__dirname + '/assets/thumbnails'));
 
 mongoose
   .connect(process.env.MONGO_URI, {
