@@ -24,6 +24,9 @@ mongoose
 
 app.use('/api/items', ITEMS_PATH);
 app.use('/api/categories', CATEGORIES_PATH);
+app.get('/*', (req, res) => {
+  res.sendFile(path.join(__dirname, './dist', 'index.html'));
+});
 
 app.listen(PORT, () => {
   console.log(`Listening on port ${PORT}`);
