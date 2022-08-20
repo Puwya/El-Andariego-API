@@ -12,8 +12,11 @@ const PORT = process.env.PORT || 3000;
 // Middleware
 app.use(cors());
 app.use(express.json());
-app.use(express.static(path.join(__dirname, '/public/dist')));
-app.use(express.static(path.join(__dirname, '/assets')));
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static(__dirname + '/public/dist'));
+}
+
+app.use(express.static(__dirname + '/assets'));
 
 mongoose
   .connect(process.env.MONGO_URI, {
@@ -26,9 +29,11 @@ mongoose
 app.use('/api/items', ITEMS_PATH);
 app.use('/api/categories', CATEGORIES_PATH);
 
-app.get('/*', (req, res) => {
-  res.sendFile(path.join(__dirname, './dist', 'index.html'));
-});
+if (process.env.NODE_ENV === 'production') {
+  app.get('/*', (req, res) => {
+    res.sendFile(path.join(__dirname, './dist', 'index.html'));
+  });
+}
 
 app.listen(PORT, () => {
   console.log(`Listening on port ${PORT}`);
