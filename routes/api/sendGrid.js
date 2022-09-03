@@ -9,7 +9,7 @@ sgMail.setApiKey(process.env.SEND_GRID_API);
 router.post('/', async (req, res) => {
   try {
     const msg = {
-      to: '18aguilerac@gmail.com',
+      to: 'guluis1980@gmail.com',
       from: 'elandariegomex@gmail.com',
       subject: 'Catering Info',
       html: `
