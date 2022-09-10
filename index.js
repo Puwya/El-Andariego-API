@@ -3,8 +3,6 @@ const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
 const path = require('path');
-const ITEMS_PATH = require('./routes/api/items');
-const CATEGORIES_PATH = require('./routes/api/categories');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -12,9 +10,6 @@ const PORT = process.env.PORT || 3000;
 // Middleware
 app.use(cors());
 app.use(express.json());
-if (process.env.NODE_ENV === 'production') {
-  app.use(express.static(__dirname + '/dist'));
-}
 
 app.use(express.static(__dirname + '/assets'));
 
@@ -26,11 +21,12 @@ mongoose
   .then(() => console.log(`Mongo Connection Successful URI: ${process.env.MONGO_URI}`))
   .catch((err) => console.log(err));
 
-app.use('/api/items', ITEMS_PATH);
-app.use('/api/categories', CATEGORIES_PATH);
+app.use('/api/items', require('./routes/api/items'));
+app.use('/api/categories', require('./routes/api/categories'));
 app.use('/api/sendgrid', require('./routes/api/sendGrid'));
 
 if (process.env.NODE_ENV === 'production') {
+  app.use(express.static(__dirname + '/dist'));
   app.get('/*', (req, res) => {
     res.sendFile(path.join(__dirname, './dist', 'index.html'));
   });
