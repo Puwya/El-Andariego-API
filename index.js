@@ -18,12 +18,13 @@ mongoose
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
-  .then(() => console.log(`Mongo Connection Successful URI: ${process.env.MONGO_URI}`))
+  .then(() => console.log('Mongo Connection Successful'))
   .catch((err) => console.log(err));
 
 app.use('/api/items', require('./routes/api/items'));
 app.use('/api/categories', require('./routes/api/categories'));
 app.use('/api/sendgrid', require('./routes/api/sendGrid'));
+app.use('/api/search', require('./routes/api/search'));
 
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static(__dirname + '/dist'));
