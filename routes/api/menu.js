@@ -10,7 +10,12 @@ router.get('/', async (req, res) => {
     const categories = await Category.find();
 
     for (var i = 0; i < categories.length; i++) {
-      payload.push(await Item.find({ category: categories[i].name }));
+      const list = await Item.find({ category: categories[i].name });
+      payload.push({
+        list,
+        category: categories[i].name,
+        // priority: categories[i].priority,
+      });
     }
 
     if (payload.length <= 0) {
