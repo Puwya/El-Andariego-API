@@ -21,8 +21,8 @@ mongoose
   .then(() => console.log('Mongo Connection Successful'))
   .catch((err) => console.log(err));
 
-app.use('/api/menu', require('./routes/api/Menu'));
-app.use('/api/search', require('./routes/api/Search'));
+app.use('/api/menu', require('./routes/api/menu'));
+app.use('/api/search', require('./routes/api/search'));
 
 // Third party
 app.use('/sendgrid', require('./routes/send-grid/SendGrid'));
