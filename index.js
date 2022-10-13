@@ -21,11 +21,11 @@ mongoose
   .then(() => console.log('Mongo Connection Successful'))
   .catch((err) => console.log(err));
 
-app.use('/api/menu', require('./routes/api/menu/menu'));
-app.use('/api/categories', require('./routes/api/menu/categories'));
-app.use('/api/items', require('./routes/api/menu/items'));
-app.use('/api/sendgrid', require('./routes/api/sendGrid'));
-app.use('/api/search', require('./routes/api/search'));
+app.use('/api/menu', require('./routes/api/Menu'));
+app.use('/api/search', require('./routes/api/Search'));
+
+// Third party
+app.use('/sendgrid', require('./routes/send-grid/SendGrid'));
 
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static(__dirname + '/dist'));
