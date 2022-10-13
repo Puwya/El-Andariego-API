@@ -11,8 +11,7 @@ router.post('/save', async (req, res) => {
   try {
     const request = req.body;
     const msg = {
-      // to: 'guluis1980@gmail.com',
-      to: '18aguilerac@gmail.com',
+      to: 'guluis1980@gmail.com',
       from: 'elandariegomex@gmail.com',
       subject: 'Catering Info',
       html: `
