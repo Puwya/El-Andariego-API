@@ -1,15 +1,15 @@
 const { Router } = require('express');
-const Item = require('../../models/item');
+const Item = require('../../models/menu/item');
 
 const router = Router();
 
 router.get('/:item', async (req, res) => {
   const item = req.params.item;
   try {
-    const query = await Item.find({
+    const payload = await Item.find({
       name: { $regex: item, $options: 'i' },
     });
-    res.status(200).json(query);
+    res.status(200).json(payload);
   } catch (err) {
     res.status(400).json({ err });
   }
