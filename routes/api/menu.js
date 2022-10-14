@@ -14,7 +14,7 @@ router.get('/', async (req, res) => {
       payload.push({
         list,
         category: categories[i].name,
-        // priority: categories[i].priority,
+        priority: categories[i].priority,
       });
     }
 

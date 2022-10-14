@@ -16,6 +16,10 @@ const Category = model(
       type: String,
       required: true,
     },
+    priority: {
+      type: Number,
+      required: true,
+    },
   }),
   'categories'
 );
