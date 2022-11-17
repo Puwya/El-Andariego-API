@@ -1,7 +1,7 @@
 require('dotenv').config();
 const { Router } = require('express');
 const sgMail = require('@sendgrid/mail');
-const Application = require('../../models/send-grid/SendGrid');
+const Application = require('../../models/send-grid/send-grid');
 
 const router = Router();
 

@@ -25,7 +25,7 @@ app.use('/api/menu', require('./routes/api/menu'));
 app.use('/api/search', require('./routes/api/search'));
 
 // Third party
-app.use('/sendgrid', require('./routes/send-grid/SendGrid'));
+app.use('/sendgrid', require('./routes/send-grid/send-grid'));
 
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static(__dirname + '/dist'));
