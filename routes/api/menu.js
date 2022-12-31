@@ -47,11 +47,9 @@ router.get('/items/:category', async (req, res) => {
   if (!category) {
     throw new Error('Category has to be provided');
   }
+
   try {
     const payload = await Item.find({ category });
-    if (payload.length <= 0) {
-      throw new Error(`Category: ${category} not found.`);
-    }
     res.status(200).json(payload);
   } catch (err) {
     res.status(404).send(err.message);
