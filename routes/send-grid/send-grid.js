@@ -2,6 +2,7 @@ require('dotenv').config();
 const { Router } = require('express');
 const sgMail = require('@sendgrid/mail');
 const Application = require('../../models/send-grid/send-grid');
+const axios = require('axios');
 
 const router = Router();
 
@@ -48,6 +49,28 @@ router.post('/save', async (req, res) => {
   } catch (err) {
     res.status(401).json({ err });
   }
+});
+
+router.post('/subscribe', async (req, res) => {
+  const data = {
+    contacts: [
+      {
+        email: req.body.email,
+      },
+    ],
+  };
+
+  axios.request({
+    method: 'PUT',
+    url: 'https://api.sendgrid.com/v3/marketing/contacts',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${process.env.SEND_GRID_API}`,
+    },
+    data,
+  });
+
+  res.status(201).json({ msg: 'Email has been subscribed' });
 });
 
 module.exports = router;
